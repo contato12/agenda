@@ -5,22 +5,17 @@
     include_once("connection.php");
     include_once("url.php");
 
-    
+    $idDoGet = $_GET["id"];
+    $idDoGetPreenchido = !empty($idDoGet);
 
-    $id;
-
-    if(!empty($_GET)){
-        $id = $_GET["id"];
-    }
-
-    if(!empty($id)){
+    if($idDoGetPreenchido){
         //Retorna os dados de um contato.
         
         $query = "SELECT * FROM contacts WHERE id=:id";
 
         $stmt = $conn->prepare($query);
 
-        $stmt->bindParam(":id", $id);
+        $stmt->bindParam(":id", $idDoGet);
 
         $stmt->execute();
 
